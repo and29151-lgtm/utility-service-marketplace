@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customer Dashboard</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background-color: #f2f2f2; }
+    h1 { color: #333; }
+    .service-card {
+      background-color: #fff;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #aaa;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    select {
+      padding: 5px;
+      margin-left: 10px;
+    }
+  </style>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "utility-service-marketplace.firebaseapp.com",
+      projectId: "utility-service-marketplace",
+      storageBucket: "utility-service-marketplace.appspot.com",
+      messagingSenderId: "920971079626",
+      appId: "1:920971079626:web:d1cd26c7d018595c50e933"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Logout function
+    window.logoutCustomer = function() {
+      signOut(auth).then(() => {
+        alert("Logged out successfully");
+        window.location.href = "customerlogin.html";
+      }).catch((error) => {
+        alert(error.message);
+      });
+    }
+
+    // Sample service data (later we will fetch from Firebase)
+    const services = [
+      { name: "Plumbing", price: 500 },
+      { name: "Electrical", price: 400 },
+      { name: "AC Repair", price: 800 },
+      { name: "Home Cleaning", price: 600 }
+    ];
+
+    // Render services dynamically
+    window.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("services-container");
+
+      services.forEach(service => {
+        const div = document.createElement("div");
+        div.className = "service-card";
+        div.innerHTML = `
+          <h3>${service.name}</h3>
+          <p>Starting Price: ₹${service.price}</p>
+          <button onclick="bookService('${service.name}')">Book Now</button>
+        `;
+        container.appendChild(div);
+      });
+    });
+
+    // Book service function
+    window.bookService = function(serviceName) {
+      alert(`You clicked Book Now for ${serviceName}`);
+      // Later we will add database booking logic here
+    }
+  </script>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <h1>Welcome, Customer!</h1>
+  <button onclick="logoutCustomer()">Logout</button>
+</div>
+
+<p>Select your location: 
+  <select id="location">
+    <option value="Kochi">Kochi</option>
+    <option value="Trivandrum">Trivandrum</option>
+    <option value="Kozhikode">Kozhikode</option>
+    <option value="Thrissur">Thrissur</option>
+  </select>
+</p>
+
+<h2>Available Services</h2>
+<div id="services-container"></div>
+
+</body>
+</html>

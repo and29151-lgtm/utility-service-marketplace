@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customer Signup</title>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyASleF_By3JDrjQfugRxM0uQW-Q-vk9mnc",
+      authDomain: "utility-service-marketplace.firebaseapp.com",
+      projectId: "utility-service-marketplace",
+      storageBucket: "utility-service-marketplace.appspot.com",
+      messagingSenderId: "920971079626",
+      appId: "1:920971079626:web:d1cd26c7d018595c50e933"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.signupCustomer = function() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert("Account created successfully");
+          window.location.href = "customer-login.html";
+        })
+        .catch(error => {
+          alert(error.message);
+        });
+    }
+  </script>
+
+</head>
+
+<body>
+
+<h2>Customer Signup</h2>
+
+<input type="email" id="email" placeholder="Enter email"><br><br>
+<input type="password" id="password" placeholder="Enter password"><br><br>
+
+<button onclick="signupCustomer()">Create Account</button>
+
+</body>
+</html>
