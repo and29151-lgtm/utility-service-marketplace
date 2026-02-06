@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Service Providers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <h2 id="serviceTitle">Service Providers</h2>
+</header>
+
+<div class="container" id="providersList"></div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const service = params.get("service");
+
+document.getElementById("serviceTitle").innerText =
+  "Available " + service + " Services";
+
+let providersHTML = "";
+
+// 🔧 PLUMBER
+if(service === "Plumber") {
+  providersHTML = `
+    <div class="card">
+      <h3>Raj Plumbing Services</h3>
+      <p>Rating: ⭐ 4.6</p>
+      <p>Price: ₹300</p>
+      <p>Available Today</p>
+      <a href="booking.html"><button>Book Now</button></a>
+    </div>
+
+    <div class="card">
+      <h3>City Pipe Fix</h3>
+      <p>Rating: ⭐ 4.3</p>
+      <p>Price: ₹250</p>
+      <p>Available Tomorrow</p>
+      <a href="booking.html"><button>Book Now</button></a>
+    </div>
+  `;
+}
+
+// 🔧 ELECTRICIAN
+else if(service === "Electrician") {
+  providersHTML = `
+    <div class="card">
+      <h3>Raj Electricals</h3>
+      <p>Rating: ⭐ 4.5</p>
+      <p>Price: ₹400</p>
+      <p>Available Today</p>
+      <a href="booking.html"><button>Book Now</button></a>
+    </div>
+
+    <div class="card">
+      <h3>PowerFix Services</h3>
+      <p>Rating: ⭐ 4.2</p>
+      <p>Price: ₹350</p>
+      <p>Available Tomorrow</p>
+      <a href="booking.html"><button>Book Now</button></a>
+    </div>
+  `;
+}
+
+// 🔧 CLEANING
+else if(service === "Cleaning") {
+  providersHTML = `
+    <div class="card">
+      <h3>CleanPro Services</h3>
+      <p>Rating: ⭐ 4.4</p>
+      <p>Price: ₹500</p>
+      <p>Available Today</p>
+      <a href="booking.html"><button>Book Now</button></a>
+    </div>
+  `;
+}
+
+// 🔧 AC REPAIR
+else if(service === "AC") {
+  providersHTML = `
+    <div class="card">
+      <h3>CoolTech AC Repair</h3>
+      <p>Rating: ⭐ 4.7</p>
+      <p>Price: ₹800</p>
+      <p>Available Today</p>
+      <a href="booking.html"><button>Book Now</button></a>
+    </div>
+  `;
+}
+
+document.getElementById("providersList").innerHTML = providersHTML;
+
+</script>
+
+</body>
+</html>
